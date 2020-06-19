@@ -1,0 +1,95 @@
+\subsection{Problem Definition}
+For a first order ordinary differential equation given by 
+\begin{equation}\label{eq:genericFirstOrder}
+    \frac{dy}{dt} = f(t,y)
+\end{equation}
+with an initial condition $y(t_0)=\overline{y}$, our aim is to find the solution $y(t)$. This is described as an initial value problem. Alternate notation for $\frac{dy}{dt}$ is $\overline{y}$, $y'$, or $\dot{y}$.
+
+\begin{example}
+ The differential equation
+ \begin{equation*}
+     \frac{dy}{dt}=3y
+ \end{equation*}
+ with initial condition $y(0) = 4$, has the solution $y(t)$ given by
+ \begin{equation*}
+     y(t) = 4e^{3t}
+ \end{equation*}
+\end{example}
+
+\subsection{Forward Euler Method}
+Intuitively, the solution $y(t)$ can be \emph{approximated} at particular timesteps if the initial value of the solution is known. Consider equation \ref{eq:genericFirstOrder}, with an initial value $y(t_0) = \bar{y}$ at the initial time $t_0$. Moving forward in time to timestep $t_1$, which is separated from $t_0$ by a small difference of $\Delta t$, we can approximate that the solution at $t_1$, given by $y(t_1)$ is
+
+\begin{align*}
+    y(t_1) &= \left.(t_1 - t_0) \frac{dy}{dt}\right|_{t=t_0} + y(t_0)\\
+    &=\left.\Delta t\cdot \frac{dy}{dt}\right|_{t=t_0} + y(t_0)\\
+    &=\Delta t \cdot f(t_0, y_0) + y(t_0)
+\end{align*}
+
+Letting the timestep $\Delta t$ be represented by $h$, and generalising this relationship for two arbitrary consecutive moments in time $t_i$ and $t_{i+1}$ with a time difference of $h$ yields
+\begin{equation}\label{eq:forwardEuler}
+    y(t_{i+1}) = y(t_i) + hf(t_i, y_i)
+\end{equation}
+The solution for any first order ODE can be approximated with equation \ref{eq:forwardEuler} by plugging in successive values of $t_i$ and $y_i$, for a timestep $h$ of your choice.
+
+\begin{example}
+ The differential equation
+ $$
+ \frac{dy}{dt} = -3y
+ $$
+ with initial condition $y(0) = 1.0$ can be solved with a timestep $\Delta t=h=0.1$ as follows.
+ \begin{alignat*}{3}
+     t&=0 \qquad &&y=1.0\\
+     t&=0.1 \qquad &&y=1.0+0.1(-3.0 \times 1.0) = 0.7\\
+     t&=0.2 \qquad &&y=0.7+0.1(-3.0\times 0.7)=0.49\\
+     t&=0.3 \qquad &&y=0.49 + 0.1(-3.0\times 0.49) = 0.343\\
+     &&\vdots
+     \end{alignat*}
+     
+     This result can be plotted to give an approximation of the solution for the ODE.
+\end{example}
+
+\subsection{Formal Taylor Series based method}
+An alternative, and more formal way of arriving at the Forward Euler method is by using a Taylor series expansion. The definition of Taylor series for a function $y(t)$ centered around a value $t_0$ is given by
+\begin{multline*}
+  y(t)=y(t_0) + y'(t_0)(t-t_0) + \frac{1}{2!}y''(t_0)(t-t_0)^2 + \frac{1}{3!}y'''(t_0)(t-t_0)^3 \\ +\, \dots\, + \frac{1}{n!}y^{(n)}(t_0)(t-t_0)^n +\, \dots
+\end{multline*}
+where $y^{(n)}$ indicates the $n^{th}$ derivative of $y(t)$. Using the series expansion to estimate $y(t_{i+1})$ around $y(t_i)$, we get
+\begin{multline}\label{eq:taylorAroundYti}
+     y(t_{i+1})=y(t_i) + y'(t_i)(t_{i+1}-t_i) + \frac{1}{2!}y''(t_i)(t_{i+1}-t_i)^2 \\+ \frac{1}{3!}y'''(t_i)(t_{i+1}-t_i)^3  +\, \dots\, + \frac{1}{n!}y^{(n)}(t_i)\underbrace{(t_{i+1}-t_i)^n}_{\equiv\,\Delta t = h} +\, \dots
+\end{multline}
+The series expansion in equation \ref{eq:taylorAroundYti} can be simplified to get
+\begin{equation*}
+   y(t_{i+1})=y(t_i) + y'(t_i)h + \frac{1}{2!}y''(t_i)h^2 + \frac{1}{3!}y'''(t_i)h^3 +\, \dots\, + \frac{1}{n!}{y^{(n)}(t_i)}h^n +\, \dots 
+\end{equation*}
+Replacing $y'(t_i)$ with $f(t_i, y_i)$, $y''(t_i)$ with $f'(t_i, y_i)$, and so forth based on equation \ref{eq:genericFirstOrder}, we arrive at the final form of the Taylor series
+\begin{equation}\label{eq:taylorFinalEuler}
+     y(t_{i+1})=y(t_i) + f(t_i, y_i)h + \frac{1}{2!}f'(t_i, y_i)h^2 + \frac{1}{3!}f''(t_i, y_i)h^3 +\, \dots\, + \frac{1}{n!}f^{(n-1)}(t_i, y_i)h^n +\, \dots 
+\end{equation}
+A first order truncation of the above equation \ref{eq:taylorFinalEuler}  from manipulating the Taylor series provides us equation \ref{eq:forwardEuler}, which we earlier derived intuitively.
+
+Alternatively, we can truncate equation \ref{eq:taylorAroundYti} at the first derivative  to get 
+\begin{multline*}
+     y(t_{i+1})=y(t_i) + y'(t_i)(t_{i+1}-t_i) + \xcancel{\frac{1}{2!}y''(t_i)(t_{i+1}-t_i)^2} \\\xcancel{+ \frac{1}{3!}y'''(t_i)(t_{i+1}-t_i)^3  +\, \dots\, + \frac{1}{n!}y^{(n)}(t_i)(t_{i+1}-t_i)^n +\, \dots}
+\end{multline*}
+\\
+which can be rearranged as the forward finite difference approximation of the first derivative as shown below in equation \ref{eq:firstOrderFiniteDifferenceEuler}
+\begin{equation}\label{eq:firstOrderFiniteDifferenceEuler}
+    y'(t_i) = \frac{y(t_{i + 1}) - y(t_i)}{h}
+\end{equation}
+Substituting the original problem $y'(t) = f(t, y)$ into the finite difference approximation in equation \ref{eq:firstOrderFiniteDifferenceEuler} and rearranging to make $y(t_{i+1})$ the subject once again gives us equation \ref{eq:forwardEuler}, which is the Forward Euler Method. 
+
+\subsection{Error Analysis}
+Since the Forward Euler Method is a numerical method, it only gives us an approximation of the actual analytical solution that could be obtained by solving the ODE with pen and paper. As such, it is important to know about the errors in the solution introduced by this numerical approximation so that we can validate our solutions' accuracy when modelling actual problems.
+
+The two main sources of error are \emph{truncation error}, denoted by $\varepsilon_t$, and \emph{propagated error}, denoted by $\varepsilon_p$.
+\begin{enumerate}
+    \item Local Truncation Error ($\varepsilon_t$), is the error committed at each timestep because of erroneous evaluation of the Taylor series that was caused by truncating the infinite series.
+    \item Propagated Error ($\varepsilon_p$), is the error that is accumulated at each timestep because of the truncation done in the previous timestep. 
+\end{enumerate}
+The Global Error, $\varepsilon_n$, also known as the Global Truncation Error at any  particular timestep, $t_n$, is defined as
+\begin{equation}
+\varepsilon_n = \varepsilon_t + \varepsilon_p 
+\end{equation}
+which is also the difference between analytical and numerical solution. It is possible to show that $\varepsilon_n$ is $O(h)$, i.e that it increases or decreases linearly with the size of the timestep chosen.
+
+\subsection{Higher Order Methods based on Taylor Series}

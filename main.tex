@@ -1,0 +1,160 @@
+\documentclass[a4paper, 11pt, oneside]{bookest}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+%\usepackage{amsmath, amssymb}
+%\usepackage[space,p,lining,sups]{erewhon}
+%\usepackage[erewhon]{newtxmath}
+%\usepackage{leading}
+%\leading{14pt}
+%\usepackage{fourier, inconsolata, sourcesanspro}
+%\usepackage[colorlinks, linkcolor=darkgray]{hyperref}
+%\linkcolor{blue}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{question}{Question}
+\newtheorem{solution}{Solution}
+\usepackage{leading}
+\leading{14pt}
+%\usepackage{newpxtext, eulervm}
+%\usepackage{fourier}
+%\usepackage[lining, p]{ebgaramond}
+%\usepackage[garamondx]{newtxmath}
+%\usepackage{XCharter}
+%\usepackage[xcharter]{newtxmath}
+%\usepackage[space, p, lining, sups]{erewhon}
+%\usepackage[sups, tabular, p]{erewhon}
+%\usepackage[erewhon]{newtxmath}
+%\renewcommand{\slshape}{\itshape}
+%\usepackage{inconsolata}
+%\usepackage{CormorantGaramond}
+%\usepackage[lining]{CrimsonPro}
+\usepackage[swashQ, p, lining, sups]{cochineal}
+%\usepackage{newpxmath}
+\usepackage[cochineal, cochf, cochrho]{newtxmath}
+%\usepackage{libertinus}
+%\usepackage[libertine, liby]{newtxmath}
+%\usepackage{kpfonts, fbb}
+%\usepackage{newtxtext, newtxmath}
+%\usepackage{newpxtext, newpxmath}
+%\usepackage{fouriernc}
+%\usepackage{stickstootext}
+%\usepackage[stix2]{newtxmath}
+%\usepackage{Baskervaldx}%
+%\usepackage[baskervaldx]{newtxmath}
+%\usepackage{fourier, sourceserifpro}
+%\usepackage[sups]{XCharter}
+%\usepackage[xcharter]{newtxmath}
+%\usepackage{fourier, noto}
+%\usepackage{newtxtext, newtxmath}
+%\usepackage{newpxtext, newpxmath}
+%\usepackage[swashQ, lining, p]{cochineal}
+%\usepackage[cochineal, cochrho, cochf]{newtxmath}
+%\usepackage[defaultsans, scale=0.9]{opensans}
+%\usepackage{sectsty}
+%\usepackage{fourier, inconsolata}
+%\usepackage{libertinus, libertinust1math}
+%\usepackage{fouriernc}
+%\usepackage{sourceserifpro, sourcesanspro, sourcecodepro}
+%\usepackage{librefranklin, inconsolata}
+%\usepackage{cmbright}
+%\usepackage{fbb, gillius, inconsolata}
+%\usepackage[small]{eulervm}
+%\usepackage{newtxtext, newtxmath, inconsolata}
+%\usepackage[math]{kurier}
+%\usepackage[math]{iwona}
+%\usepackage{fbb}
+%\usepackage{newpxmath}
+%\usepackage{newpxtext, newpxmath, inconsolata}
+%\linespread{1.05}
+%\usepackage[lining,p]{ebgaramond}
+%\usepackage[ebgaramond]{newtxmath}
+%\usepackage{inconsolata}
+\usepackage[expansion, protrusion]{microtype}
+\usepackage{float, graphicx, booktabs, cancel}
+%\allsectionsfont{\sffamily}
+%\usepackage[linktoc=all, hidelinks]{hyperref}
+%\everymath{\displaystyle}
+%\usepackage[small]{eulervm}
+%\linespread{1.1235}
+%\usepackage{sectsty}
+%\allsectionsfont{\sffamily}
+%\usepackage{ragged2e}
+%\usepackage[lmargin=1cm, rmargin=1cm, tmargin=0.5cm, bmargin=1in]{geometry}
+%\newcommand\parunderbrace[2]{\settowidth2\ubwidth{$#1$}\underbrace{#1}_{\parbox{2\ubwidth}{\small\RaggedRight#2}}}
+
+\title{\textsc{BN5205 \\ \bigskip Computational Biomechanics}}
+\author{}
+\date{Last updated on \today}
+
+\begin{document}
+
+
+\frontmatter
+\maketitle
+%{\vspace{1in}\hfill\parbox{0.5\textwidth}{ Lecture notes and case studies for the graduate level Computational Biomechanics module conducted at the National University of Singapore by their Department of Biomedical Engineering}\hfill}
+\tableofcontents
+%\chapter{Preface}
+%\input{preface}
+%\chapter{Outline}
+%\input{outline}
+\mainmatter
+\part{Numerical Methods for Differential Equations}
+
+\chapter{Single Ordinary Differential Equations}
+\section{Theory}
+\input{ch1_singleODE/singleODE}
+\section{Case Study: Viscoelasticity}
+\input{ch1_singleODE/viscoelasticity}
+
+\chapter{Second Order Initial and Boundary Value Problems}
+\section{Theory}
+\section{Case Study: Smooth Muscle Contraction}
+
+\chapter{Multiple Ordinary Differential Equations}
+\section{Theory}
+\section{Case Study: Three point bending}
+
+\chapter{Parabolic Partial Differential Equations}
+\section{Theory}
+\section{Case Study: Leukocyte Migration}
+
+\chapter{Elliptic Partial Differential Equations}
+\section{Theory}
+\section{Case Study: Cryoablation}
+
+\chapter{Assignment A}
+\section{Problem Background}
+\section{Numerical Solution Code}
+\section{Solution Report}
+
+\part{Finite Element Methodology}
+
+\chapter{Interpolation}
+\section{Theory}
+\section{Exercise}
+
+\chapter{The 1D Heat Equation}
+\section{Theory}
+\section{Exercise}
+
+\chapter{The 2D Heat Equation}
+\section{Theory}
+\section{Exercise}
+
+\chapter{1D Linear Elasticity}
+\section{Theory}
+\section{Exercise}
+
+\chapter{3D Elasticity}
+\section{Theory}
+\section{Exercise}
+
+\chapter{Assignment B}
+\section{Problem Background}
+\section{Mathematical Formulation of the Finite Element Method}
+\section{Finite Element Code}
+\section{Solution Report}
+
+\end{document}
